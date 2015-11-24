@@ -251,6 +251,7 @@ UINT C3DSModel::ReadFacetInfo(t3DObject *pObj, UINT n)
 	pObj->numOfFaces = ReadWord();
 	pObj->pFaces = new tFace[pObj->numOfFaces];
 	memset(pObj->pFaces, 0, sizeof(tFace) * pObj->numOfFaces);
+
 	// 读取面索引值(第4个值为3dMAX使用的参数，舍弃)
 	for (int i=0; i<pObj->numOfFaces; i++)
 	{
@@ -418,17 +419,19 @@ void C3DSModel::ComputeNormals(void)
 		for(int nOfFace=0; nOfFace<obj->numOfFaces; nOfFace++)
 		{
 			index = obj->pFaces[nOfFace].vertIndex;
+
 			// 三角形的3个顶点
 			vPoly[0] = obj->pVerts[index[0]];
 			vPoly[1] = obj->pVerts[index[1]];
 			vPoly[2] = obj->pVerts[index[2]];
+
 			// 计算这个三角形的法线量
 			v1 = vPoly[0]-vPoly[1];
 			v2 = vPoly[2]-vPoly[1];
 			vNormal = vector3<double>::cross(v1, v2);
 
 			pTempNormals[nOfFace] = vNormal;					// 保存未单位化的法向量
-			vNormal = vector3<double>::normalize(vNormal);						// 单位化法向量
+			vNormal = vector3<double>::normalize(vNormal);		// 单位化法向量
 			pNormals[nOfFace] = vNormal;						// 增加到法向量数组列表
 		}
 		vector3<double> vSum(0.0, 0.0, 0.0);

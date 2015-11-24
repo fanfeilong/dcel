@@ -98,7 +98,9 @@ int main(int argc, char** argv)
 	//creat a solid instance and load the data file
 	dsolid* solid = new dsolid();
 	solid->load_from_m_file(file_name);
-	
+	for(int i=0;i<5;i++){
+		solid->catmull_clark_subdivision();
+	}
 	//do some test for the solid
 	dcel_test_dsolid_vertex_iterator(solid);
 	dcel_test_dsolid_halfedge_iterator(solid);

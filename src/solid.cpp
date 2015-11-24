@@ -1495,36 +1495,36 @@ void dsolid::doo_sabin_subdivision()
 
             //给半边赋值
             half_1->edge    = vertex_2->half->edge;	//1.edge
-            half_1->id       = ++new_half_id;			//2.id
+            half_1->id       = ++new_half_id;	    //2.id
             half_1->left     = new_face;				//3.left
             half_1->origin   = vertex_1;				//4.orgin
-            half_1->previous = half_4;					//5.previous
-            half_1->next     = half_2;					//6.next
+            half_1->previous = half_4;				//5.previous
+            half_1->next     = half_2;				//6.next
             half_1->pair	 = vertex_2->half;			//7.pair
-            vertex_2->half->pair = half_1;				//补上步骤1中的pair
+            vertex_2->half->pair = half_1;			//补上步骤1中的pair
 
-            half_2->edge    = edge_1;					//1.edge
-            half_2->id       = ++new_half_id;			//2.id
+            half_2->edge    = edge_1;				//1.edge
+            half_2->id       = ++new_half_id;		//2.id
             half_2->left     = new_face;				//3.left
             half_2->origin   = vertex_2;				//4.orgin
-            half_2->previous = half_1;					//5.previous
-            half_2->next     = half_3;					//6.next
+            half_2->previous = half_1;				//5.previous
+            half_2->next     = half_3;				//6.next
 
             half_3->edge    = vertex_4->half->edge;	//1.edge
-            half_3->id       = ++new_half_id;			//2.id
+            half_3->id       = ++new_half_id;		//2.id
             half_3->left     = new_face;				//3.left
             half_3->origin   = vertex_3;				//4.orgin
-            half_3->previous = half_2;					//5.previous
-            half_3->next     = half_4;					//6.next
+            half_3->previous = half_2;				//5.previous
+            half_3->next     = half_4;				//6.next
             half_3->pair	 = vertex_4->half;			//7.pair
-            vertex_4->half->pair = half_3;				//补上步骤1中的pair
+            vertex_4->half->pair = half_3;			//补上步骤1中的pair
 
-            half_4->edge    = edge_2;					//1.edge
-            half_4->id       = ++new_half_id;			//2.id
+            half_4->edge    = edge_2;				//1.edge
+            half_4->id       = ++new_half_id;		//2.id
             half_4->left     = new_face;				//3.left
             half_4->origin   = vertex_4;				//4.orgin
-            half_4->previous = half_3;					//5.previous
-            half_4->next     = half_1;					//6.next
+            half_4->previous = half_3;				//5.previous
+            half_4->next     = half_1;				//6.next
 
             //保存半边
             new_half_edges[half_1->id] = half_1;
@@ -1533,10 +1533,10 @@ void dsolid::doo_sabin_subdivision()
             new_half_edges[half_4->id] = half_4;
 
             //给边赋值
-            edge_1->id   = ++new_edge_id;	//1.id
-            edge_2->id   = ++new_edge_id;	//1.id
-            edge_1->half = half_2;			//2.half
-            edge_2->half = half_4;			//2.half
+            edge_1->id   = ++new_edge_id;	        //1.id
+            edge_2->id   = ++new_edge_id;	        //1.id
+            edge_1->half = half_2;			        //2.half
+            edge_2->half = half_4;			        //2.half
 
             //保存边
             new_edges[edge_1->id] = edge_1;
@@ -1595,20 +1595,20 @@ void dsolid::doo_sabin_subdivision()
                     }
                     dhalfedge* new_half = new dhalfedge();
                     new_half->edge    = destination->half->pair->next->edge;	//1.edge
-                    new_half->id       = ++new_half_id;				//2.id
-                    new_half->left     = new_face;					//3.left
-                    new_half->origin   = *it;						//4.origin
+                    new_half->id       = ++new_half_id;				        //2.id
+                    new_half->left     = new_face;					        //3.left
+                    new_half->origin   = *it;						        //4.origin
                     if (last_new_half!=NULL)
                     {
-                        new_half->previous  = last_new_half;		//5.previous
-                        last_new_half->next = new_half;				//6.next
+                        new_half->previous  = last_new_half;		            //5.previous
+                        last_new_half->next = new_half;				        //6.next
                     }
                     else
                     {
                         first_new_half = new_half;
                     }
-                    new_half->pair	   = destination->half->pair->next;			//7.pair
-                    destination->half->pair->next->pair  = new_half;					//补上步骤2中的pair
+                    new_half->pair	   = destination->half->pair->next;		//7.pair
+                    destination->half->pair->next->pair  = new_half;			//补上步骤2中的pair
 
                     //保存半边
                     new_half_edges[new_half->id] = new_half;
@@ -1809,39 +1809,39 @@ void dsolid::catmull_clark_subdivision()
             dhalfedge* face2edge = new dhalfedge;
             dhalfedge* edge2face = new dhalfedge;
 
-            new_edge->id = ++new_edge_id;		//1.id
-            new_edges[new_edge->id]=new_edge;	//存储新边
-            new_edge->half = vertex2edge;		//2.half
+            new_edge->id = ++new_edge_id;		               //1.id
+            new_edges[new_edge->id]=new_edge;	               //存储新边
+            new_edge->half = vertex2edge;		               //2.half
 
             new_face->id = ++new_face_id;
-            new_faces[new_face->id] = new_face;		//存储新面
+            new_faces[new_face->id] = new_face;		           //存储新面
             new_face->half = vertex2edge;
 
-            vertex2edge->id = ++new_half_id;		//1.id
-            new_half_edges[vertex2edge->id]=vertex2edge;	//存储新半边
-            vertex2edge->edge = new_edge;		//2.edge
-            vertex2edge->origin = new_vertex_vertex;	//4.origin
-            vertex2edge->left = new_face;				//5.face
-            vertex2edge->next = edge2face;			//6.next
-            vertex2edge->previous = edge2vertex;		//7.previous
+            vertex2edge->id = ++new_half_id;		               //1.id
+            new_half_edges[vertex2edge->id]=vertex2edge;       //存储新半边
+            vertex2edge->edge = new_edge;		               //2.edge
+            vertex2edge->origin = new_vertex_vertex;           //4.origin
+            vertex2edge->left = new_face;				       //5.face
+            vertex2edge->next = edge2face;			           //6.next
+            vertex2edge->previous = edge2vertex;		           //7.previous
 
-            edge2vertex->id = ++new_half_id;		//1.id
-            new_half_edges[edge2vertex->id]=edge2vertex;	//存储新半边
+            edge2vertex->id = ++new_half_id;		               //1.id
+            new_half_edges[edge2vertex->id]=edge2vertex;	       //存储新半边
             if (last_new_edge!=NULL)
             {
-                edge2vertex->edge = last_new_edge;		//2.edge
-                edge2vertex->pair = last_vertex2edge;		//3.pair
-                last_vertex2edge->pair = edge2vertex;		//3.pair
+                edge2vertex->edge = last_new_edge;		       //2.edge
+                edge2vertex->pair = last_vertex2edge;	       //3.pair
+                last_vertex2edge->pair = edge2vertex;	       //3.pair
             }
             else
                 first_edge2vertex = edge2vertex;
             edge2vertex->origin = corres_edge_previous_vertex;	//4.origin
             //新边点在这里的half在这里赋值，每个新边点可能会被赋值两次（临边界的只有一次），
             //但是应该不是非常影响效率，应该不会存在新边点的half没有赋值。
-            corres_edge_previous_vertex->half = edge2vertex;	//3.half
-            edge2vertex->left = new_face;				//5.face
-            edge2vertex->next = vertex2edge;			//6.next
-            edge2vertex->previous = face2edge;		//7.previous
+            corres_edge_previous_vertex->half = edge2vertex;	   //3.half
+            edge2vertex->left = new_face;				       //5.face
+            edge2vertex->next = vertex2edge;			           //6.next
+            edge2vertex->previous = face2edge;		           //7.previous
 
             face2edge->id = ++new_half_id;
             new_half_edges[face2edge->id]=face2edge;	//存储新半边
@@ -2120,24 +2120,24 @@ void dsolid::loop_subdivision()
                 dhalfedge* new_half = new dhalfedge;
                 dedge* new_edge = new dedge;
 
-                new_edge->id = ++new_edge_id;		//1.id
-                new_edge->half = new_half;			//2.half
+                new_edge->id = ++new_edge_id;		    //1.id
+                new_edge->half = new_half;			    //2.half
                 new_edges[new_edge->id] = new_edge;		//储存边
 
-                new_half->edge = new_edge;		//1.edge
-                new_half->origin = current_vertex;	//2.origin
+                new_half->edge = new_edge;		        //1.edge
+                new_half->origin = current_vertex;	    //2.origin
                 if (current_vertex->half==NULL)
                 {
                     current_vertex->half=new_half;		//4.half
                 }
-                new_half->id = ++new_half_id;						//3.id
+                new_half->id = ++new_half_id;					//3.id
                 new_half_edges[new_half->id] = new_half;			//储存半边
                 edge2edge_half_edges[iter->second] = new_half;	//为pair准备
-                new_half->left = current_face;						//4.left
+                new_half->left = current_face;					//4.left
                 if (last_half!=NULL)
                 {
-                    new_half->previous=last_half;					//5.previous
-                    last_half->next = new_half;						//6.next
+                    new_half->previous=last_half;				//5.previous
+                    last_half->next = new_half;					//6.next
                 }
                 else
                 {
