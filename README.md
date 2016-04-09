@@ -15,3 +15,4 @@ dcel is a porject for 3d lab. include stl like datastruct,iterator and algorithm
 Read the following pages for more information
 - [The DCEL Data Structure for 3D Graphics](http://www.holmes3d.net/graphics/dcel/)
 - [A Quick Introduction to Subdivision Surfaces](http://www.holmes3d.net/graphics/subdivision/)
+- [Quad-Edge Data Structure and library](https://www.cs.cmu.edu/afs/andrew/scs/cs/15-463/2001/pub/src/a2/quadedge.html)
